@@ -1,0 +1,191 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/sp/site-design-site-script-schema.json",
+  "actions": [
+    {
+      "verb": "createSPList",
+      "listName": "News",
+      "description": "Aktuelle Neuigkeiten aus den Abteilungen",
+      "template": "GenericList",
+      "subactions": [
+        {
+          "verb": "setDescription",
+          "description": "Aktuelle Neuigkeiten aus den Abteilungen"
+        },
+        {
+          "verb": "addSPField",
+          "fieldType": "Text",
+          "displayName": "Titel",
+          "internalName": "NewsTitle",
+          "required": true
+        },
+        {
+          "verb": "addSPField",
+          "fieldType": "Note",
+          "displayName": "Inhalt",
+          "internalName": "NewsContent",
+          "required": true
+        },
+        {
+          "verb": "addSPField",
+          "fieldType": "Choice",
+          "displayName": "Kategorie",
+          "internalName": "NewsCategory",
+          "required": true,
+          "choices": [
+            "Technik",
+            "Sales",
+            "Produktion",
+            "Academy",
+            "Sicherheit",
+            "Marketing",
+            "HR"
+          ]
+        },
+        {
+          "verb": "addSPField",
+          "fieldType": "User",
+          "displayName": "Autor",
+          "internalName": "NewsAuthor",
+          "required": true
+        }
+      ]
+    },
+    {
+      "verb": "createSPList",
+      "listName": "Events",
+      "description": "Unternehmens-Events und Veranstaltungen",
+      "template": "GenericList",
+      "subactions": [
+        {
+          "verb": "setDescription",
+          "description": "Unternehmens-Events und Veranstaltungen"
+        },
+        {
+          "verb": "addSPField",
+          "fieldType": "Text",
+          "displayName": "Event-Titel",
+          "internalName": "EventTitle",
+          "required": true
+        },
+        {
+          "verb": "addSPField",
+          "fieldType": "Text",
+          "displayName": "Ort",
+          "internalName": "EventLocation",
+          "required": true
+        },
+        {
+          "verb": "addSPField",
+          "fieldType": "DateTime",
+          "displayName": "Datum",
+          "internalName": "EventDate",
+          "required": true
+        },
+        {
+          "verb": "addSPField",
+          "fieldType": "Text",
+          "displayName": "Uhrzeit",
+          "internalName": "EventTime",
+          "required": true
+        },
+        {
+          "verb": "addSPField",
+          "fieldType": "Note",
+          "displayName": "Beschreibung",
+          "internalName": "EventDescription",
+          "required": true
+        },
+        {
+          "verb": "addSPField",
+          "fieldType": "User",
+          "displayName": "Organisator",
+          "internalName": "EventOrganizer",
+          "required": true
+        }
+      ]
+    },
+    {
+      "verb": "createSPList",
+      "listName": "Abteilungen",
+      "description": "Unternehmens-Abteilungen und Kontaktinformationen",
+      "template": "GenericList",
+      "subactions": [
+        {
+          "verb": "setDescription",
+          "description": "Unternehmens-Abteilungen und Kontaktinformationen"
+        },
+        {
+          "verb": "addSPField",
+          "fieldType": "Text",
+          "displayName": "Abteilungsname",
+          "internalName": "DeptName",
+          "required": true
+        },
+        {
+          "verb": "addSPField",
+          "fieldType": "Note",
+          "displayName": "Beschreibung",
+          "internalName": "DeptDescription",
+          "required": true
+        },
+        {
+          "verb": "addSPField",
+          "fieldType": "Text",
+          "displayName": "Abteilungsleiter",
+          "internalName": "DeptLeader"
+        },
+        {
+          "verb": "addSPField",
+          "fieldType": "Text",
+          "displayName": "E-Mail",
+          "internalName": "DeptEmail"
+        },
+        {
+          "verb": "addSPField",
+          "fieldType": "Text",
+          "displayName": "Telefon",
+          "internalName": "DeptPhone"
+        }
+      ]
+    },
+    {
+      "verb": "setTheme",
+      "name": "Bauer Kompressoren",
+      "themeJson": {
+        "primaryColor": "#1E5BA8",
+        "backgroundColor": "#F8FAFC",
+        "tertiaryColor": "#0066CC",
+        "bodyTextColor": "#1A1A1A",
+        "neutralSecondaryColor": "#CCCCCC"
+      }
+    },
+    {
+      "verb": "addNavLink",
+      "url": "/",
+      "displayName": "Startseite",
+      "isWebRelativeUrl": true,
+      "navComponent": "GlobalNav"
+    },
+    {
+      "verb": "addNavLink",
+      "url": "/Lists/News",
+      "displayName": "News",
+      "isWebRelativeUrl": true,
+      "navComponent": "GlobalNav"
+    },
+    {
+      "verb": "addNavLink",
+      "url": "/Lists/Events",
+      "displayName": "Events",
+      "isWebRelativeUrl": true,
+      "navComponent": "GlobalNav"
+    },
+    {
+      "verb": "addNavLink",
+      "url": "/Lists/Abteilungen",
+      "displayName": "Abteilungen",
+      "isWebRelativeUrl": true,
+      "navComponent": "GlobalNav"
+    }
+  ]
+}

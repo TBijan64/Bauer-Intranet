@@ -1,0 +1,277 @@
+/* BAUER KOMPRESSOREN - Custom Styles for SharePoint */
+
+:root {
+    --primary: #1E5BA8;
+    --primary-dark: #003D7A;
+    --secondary: #E63946;
+    --accent: #0066CC;
+    --success: #06D6A0;
+    --warning: #FFB703;
+    --background: #F8FAFC;
+    --surface: #FFFFFF;
+    --surface-light: #F5F7FA;
+    --text: #1A1A1A;
+    --text-muted: #666666;
+    --border: rgba(0, 102, 204, 0.15);
+    --shadow: rgba(0, 0, 0, 0.08);
+}
+
+body {
+    background-color: var(--background);
+    color: var(--text);
+    font-family: 'Outlook', 'Segoe UI', sans-serif;
+}
+
+/* Header Styling */
+.ms-siteheader-banner {
+    background: rgba(255, 255, 255, 0.95) !important;
+    border-bottom: 1px solid var(--border) !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06) !important;
+}
+
+.ms-nav-topbar {
+    background: rgba(255, 255, 255, 0.95) !important;
+}
+
+/* Logo */
+.ms-siteheader-title {
+    color: var(--accent) !important;
+}
+
+/* Navigation */
+.ms-nav-item {
+    color: var(--text-muted) !important;
+}
+
+.ms-nav-item:hover {
+    color: var(--text) !important;
+}
+
+.ms-nav-item.is-active {
+    color: var(--accent) !important;
+    border-bottom: 3px solid var(--accent) !important;
+}
+
+/* Cards and Content Areas */
+.ms-webpart-chrome {
+    background: var(--surface) !important;
+    border: 1px solid var(--border) !important;
+    border-radius: 12px !important;
+}
+
+/* List Styles */
+.ms-ListGrid {
+    background: var(--surface) !important;
+}
+
+.ms-ListGrid-row {
+    border-bottom: 1px solid var(--border) !important;
+}
+
+.ms-ListGrid-row:hover {
+    background: var(--surface-light) !important;
+}
+
+.ms-ListGrid-cell {
+    color: var(--text) !important;
+}
+
+/* Links */
+a {
+    color: var(--accent) !important;
+    text-decoration: none;
+}
+
+a:hover {
+    color: var(--primary) !important;
+    text-decoration: underline;
+}
+
+/* Buttons */
+button.ms-Button {
+    background-color: var(--accent) !important;
+    color: white !important;
+    border: none !important;
+}
+
+button.ms-Button:hover {
+    background-color: var(--primary) !important;
+}
+
+button.ms-Button--primary {
+    background: linear-gradient(135deg, var(--primary), var(--accent)) !important;
+}
+
+/* Form Elements */
+input, textarea, select {
+    border: 1px solid var(--border) !important;
+    background: var(--surface) !important;
+    color: var(--text) !important;
+}
+
+input:focus, textarea:focus, select:focus {
+    outline: none !important;
+    border-color: var(--accent) !important;
+    box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1) !important;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+    color: var(--text) !important;
+}
+
+h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--accent), var(--secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Footer */
+.ms-siteFooter {
+    background: var(--surface) !important;
+    border-top: 1px solid var(--border) !important;
+    color: var(--text-muted) !important;
+}
+
+/* Alerts and Messages */
+.ms-MessageBar {
+    background: #06D6A0 !important;
+    color: white !important;
+}
+
+.ms-MessageBar.ms-MessageBar--error {
+    background: #E63946 !important;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .ms-webpart-chrome {
+        border-radius: 8px !important;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+}
+
+/* Custom CSS for News/Events Display */
+.news-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+}
+
+.news-item:hover {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transform: translateY(-5px);
+}
+
+.news-category {
+    display: inline-block;
+    padding: 0.4rem 0.8rem;
+    background: rgba(0, 102, 204, 0.1);
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+}
+
+.news-title {
+    color: var(--text);
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+}
+
+.news-author {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+}
+
+.author-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), var(--secondary));
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.75rem;
+}
+
+/* Department Cards */
+.dept-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+}
+
+.dept-card:hover {
+    background: var(--surface-light);
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+}
+
+.dept-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.dept-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 0.75rem;
+}
+
+.dept-description {
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+}
+
+.dept-contact {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+}
+
+.dept-contact-item {
+    margin-bottom: 0.5rem;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+    background: #CCCCCC;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #999999;
+}

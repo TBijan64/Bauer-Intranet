@@ -1,0 +1,1906 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BAUER KOMPRESSOREN - Intranet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1E5BA8;
+            --primary-dark: #003D7A;
+            --secondary: #E63946;
+            --accent: #0066CC;
+            --success: #06D6A0;
+            --warning: #FFB703;
+            --background: #F8FAFC;
+            --surface: #FFFFFF;
+            --surface-light: #F5F7FA;
+            --text: #1A1A1A;
+            --text-muted: #666666;
+            --border: rgba(0, 102, 204, 0.15);
+            --shadow: rgba(0, 0, 0, 0.08);
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--background);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(30, 91, 168, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(230, 57, 70, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(0, 102, 204, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+            animation: bgShift 20s ease-in-out infinite;
+        }
+
+        @keyframes bgShift {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            animation: slideDown 0.6s ease-out;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 0;
+        }
+
+        .logo {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .logo h1 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, var(--accent), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .logo p {
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent), var(--secondary));
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--text);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .user-menu {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .user-avatar:hover {
+            transform: scale(1.1);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 4rem 0;
+            animation: fadeIn 0.8s ease-out 0.2s both;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .hero-main {
+            background: linear-gradient(135deg, var(--surface), var(--surface-light));
+            border-radius: 24px;
+            padding: 3rem;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            cursor: pointer;
+            transition: all 0.4s ease;
+            animation: fadeIn 0.8s ease-out 0.3s both;
+        }
+
+        .hero-main::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 102, 204, 0.06), rgba(230, 57, 70, 0.03));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .hero-main:hover::before {
+            opacity: 1;
+        }
+
+        .hero-main:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 60px var(--shadow);
+        }
+
+        .hero-tag {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: rgba(0, 102, 204, 0.1);
+            border: 1px solid var(--accent);
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .hero-main h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero-main p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .hero-meta {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .meta-icon {
+            width: 20px;
+            height: 20px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+        }
+
+        .hero-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .hero-card {
+            background: var(--surface);
+            border-radius: 16px;
+            padding: 2rem;
+            border: 1px solid var(--border);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-card:nth-child(1) {
+            animation: fadeIn 0.8s ease-out 0.4s both;
+        }
+
+        .hero-card:nth-child(2) {
+            animation: fadeIn 0.8s ease-out 0.5s both;
+        }
+
+        .hero-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--accent), var(--secondary));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .hero-card:hover::before {
+            opacity: 1;
+        }
+
+        .hero-card:hover {
+            transform: translateX(5px);
+            background: var(--surface-light);
+        }
+
+        .hero-card h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+
+        .hero-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* News Grid */
+        .news-section {
+            margin-bottom: 4rem;
+            animation: fadeIn 0.8s ease-out 0.6s both;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .section-header h2 {
+            font-size: 2rem;
+            font-weight: 800;
+        }
+
+        .view-all {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: gap 0.3s ease;
+        }
+
+        .view-all:hover {
+            gap: 1rem;
+        }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .news-card {
+            background: var(--surface);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+
+        .news-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px var(--shadow);
+            border-color: var(--accent);
+        }
+
+        .news-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #1E5BA8, #0066CC);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            font-weight: 800;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .news-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, transparent, rgba(0, 0, 0, 0.1));
+        }
+
+        .news-content {
+            padding: 2rem;
+        }
+
+        .news-category {
+            display: inline-block;
+            padding: 0.4rem 0.8rem;
+            background: rgba(0, 102, 204, 0.1);
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .news-card h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            line-height: 1.3;
+        }
+
+        .news-card p {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .news-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .news-author {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .author-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        .author-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .author-name {
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .news-date {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        /* Quick Links */
+        .quick-links {
+            background: var(--surface);
+            border-radius: 16px;
+            padding: 2rem;
+            border: 1px solid var(--border);
+            margin-bottom: 4rem;
+            animation: fadeIn 0.8s ease-out 0.7s both;
+        }
+
+        .quick-links h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .link-item {
+            background: var(--surface-light);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            color: var(--text);
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .link-item:hover {
+            background: var(--background);
+            border-color: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        .link-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--accent), var(--secondary));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .link-item h4 {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .link-item p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* Departments Section */
+        .departments {
+            margin-bottom: 4rem;
+            animation: fadeIn 0.8s ease-out 0.8s both;
+        }
+
+        .dept-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .dept-card {
+            background: var(--surface);
+            border-radius: 16px;
+            padding: 2rem;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .dept-card:hover {
+            background: var(--surface-light);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px var(--shadow);
+        }
+
+        .dept-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .dept-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .dept-card h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+
+        .dept-card p {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .dept-contact {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--surface);
+            border-top: 1px solid var(--border);
+            padding: 3rem 0;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+        }
+
+        .footer-section h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-section a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--accent);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+            }
+
+            nav ul {
+                gap: 1rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1rem;
+            }
+
+            nav {
+                display: none;
+            }
+
+            .hero-main h2 {
+                font-size: 1.8rem;
+            }
+
+            .news-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Post News Section */
+        .post-news-section {
+            background: linear-gradient(135deg, rgba(30, 91, 168, 0.08), rgba(0, 102, 204, 0.06));
+            border-radius: 16px;
+            padding: 2.5rem;
+            border: 1px solid var(--border);
+            margin-bottom: 4rem;
+            animation: fadeIn 0.8s ease-out 0.5s both;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .post-news-section h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text);
+            margin: 0;
+        }
+
+        .btn-open-modal {
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .btn-open-modal:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(30, 91, 168, 0.3);
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: var(--surface);
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            width: 90%;
+            max-width: 700px;
+            max-height: 90vh;
+            overflow-y: auto;
+            animation: slideUp 0.4s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem;
+            border-bottom: 1px solid var(--border);
+            background: linear-gradient(135deg, rgba(30, 91, 168, 0.05), rgba(0, 102, 204, 0.03));
+        }
+
+        .modal-header h2 {
+            margin: 0;
+            font-size: 1.8rem;
+            color: var(--text);
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 2rem;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: color 0.3s ease;
+            padding: 0;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-close:hover {
+            color: var(--text);
+        }
+
+        .modal-body {
+            padding: 2rem;
+        }
+
+        .modal-footer {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+            padding: 2rem;
+            border-top: 1px solid var(--border);
+        }
+
+        /* Tab Styles */
+        .form-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .tab-btn {
+            padding: 0.75rem 1.5rem;
+            background: none;
+            border: none;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+            margin-bottom: -2px;
+        }
+
+        .tab-btn:hover {
+            color: var(--text);
+        }
+
+        .tab-btn.active {
+            color: var(--accent);
+            border-bottom-color: var(--accent);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        /* Form Styles */
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.95rem;
+            background: var(--surface);
+            color: var(--text);
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .form-group select {
+            cursor: pointer;
+        }
+
+        /* Image Upload */
+        .image-upload {
+            position: relative;
+            margin-top: 0.5rem;
+        }
+
+        .image-upload input[type="file"] {
+            display: none;
+        }
+
+        .upload-label {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 2rem;
+            border: 2px dashed var(--border);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .upload-label:hover {
+            border-color: var(--accent);
+            background: rgba(0, 102, 204, 0.03);
+        }
+
+        .upload-icon {
+            font-size: 2rem;
+        }
+
+        .upload-label span:last-child {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .image-preview {
+            margin-top: 1rem;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .preview-item {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        .preview-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .preview-remove {
+            position: absolute;
+            top: -1px;
+            right: -1px;
+            background: #E63946;
+            color: white;
+            border: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 0 8px 0 8px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: all 0.2s ease;
+        }
+
+        .preview-remove:hover {
+            background: #d62828;
+        }
+
+        /* Buttons */
+        .btn-submit {
+            padding: 0.75rem 2rem;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(30, 91, 168, 0.3);
+        }
+
+        .btn-cancel {
+            padding: 0.75rem 2rem;
+            background: var(--surface-light);
+            color: var(--text);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-cancel:hover {
+            background: var(--border);
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .modal-content {
+                width: 95%;
+                max-height: 95vh;
+            }
+
+            .modal-header {
+                padding: 1.5rem;
+            }
+
+            .modal-body {
+                padding: 1.5rem;
+            }
+
+            .modal-footer {
+                flex-direction: column-reverse;
+            }
+
+            .btn-submit,
+            .btn-cancel {
+                width: 100%;
+            }
+
+            .post-news-section {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .post-news-section h3 {
+                width: 100%;
+            }
+
+            .btn-open-modal {
+                width: 100%;
+            }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--background);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #CCCCCC;
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #999999;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <h1>BAUER KOMPRESSOREN</h1>
+                    <p>Quality. Our DNA.</p>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#zentrale">Zentrale</a></li>
+                        <li><a href="#technik">Technik</a></li>
+                        <li><a href="#sales">Sales</a></li>
+                        <li><a href="#produktion">Produktion</a></li>
+                        <li><a href="#academy">Academy</a></li>
+                    </ul>
+                </nav>
+                <div class="user-menu">
+                    <div class="user-avatar">BK</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-grid">
+                <div class="hero-main">
+                    <span class="hero-tag">Aktuelle Meldung</span>
+                    <h2>Willkommen im Team: Neue Kolleginnen & Kollegen bei BAUER</h2>
+                    <p>Wir freuen uns, unsere neuen Teammitglieder im Unternehmen begrüßen zu dürfen. Erfahren Sie mehr über die Neuzugänge in den Bereichen Entwicklung, Sales und Produktion.</p>
+                    <div class="hero-meta">
+                        <div class="meta-item">
+                            <span class="meta-icon">👤</span>
+                            <span>Volker Sandfuchs, HR</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-icon">📅</span>
+                            <span>Heute, 09:30</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-sidebar">
+                    <div class="hero-card">
+                        <h3>Produkt-Launch: Neue Kleinanlagen Serie</h3>
+                        <p>Die Zentrale Entwicklung präsentiert die neueste Generation kompakter Hochdruck-Kompressoren.</p>
+                    </div>
+                    <div class="hero-card">
+                        <h3>Q1 Verkaufszahlen übertreffen Erwartungen</h3>
+                        <p>Das Sales Competence Center meldet einen Rekordumsatz im ersten Quartal 2026.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Post News Section -->
+    <section class="post-news-section">
+        <div class="container">
+            <h3>📝 Beitrag erstellen</h3>
+            <button id="open-post-modal" class="btn-open-modal">+ Event/News posten</button>
+        </div>
+    </section>
+
+    <!-- Modal for Creating Blog Post -->
+    <div id="post-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Neuen Beitrag erstellen</h2>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="blog-post-form">
+                    <div class="form-tabs">
+                        <button type="button" class="tab-btn active" data-tab="news-tab">📰 News</button>
+                        <button type="button" class="tab-btn" data-tab="event-tab">📅 Event</button>
+                    </div>
+
+                    <!-- News Tab -->
+                    <div id="news-tab" class="tab-content active">
+                        <div class="form-group">
+                            <label for="news-post-title">Titel</label>
+                            <input type="text" id="news-post-title" placeholder="Geben Sie einen aussagekräftigen Titel ein" required>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="news-post-author">Autor</label>
+                                <input type="text" id="news-post-author" placeholder="Ihr Name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="news-post-category">Kategorie</label>
+                                <select id="news-post-category" required>
+                                    <option value="">Wählen Sie eine Kategorie</option>
+                                    <option value="Technik">Technik</option>
+                                    <option value="Sales">Sales</option>
+                                    <option value="Produktion">Produktion</option>
+                                    <option value="Academy">Academy</option>
+                                    <option value="Sicherheit">Sicherheit</option>
+                                    <option value="Marketing">Marketing</option>
+                                    <option value="HR">HR</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="news-post-text">Inhalt</label>
+                            <textarea id="news-post-text" placeholder="Verfassen Sie Ihren Artikel hier..." rows="8" required></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="news-post-image">Bild hochladen</label>
+                            <div class="image-upload">
+                                <input type="file" id="news-post-image" accept="image/*">
+                                <label for="news-post-image" class="upload-label">
+                                    <span class="upload-icon">🖼️</span>
+                                    <span>Klicken Sie hier um ein Bild hochzuladen oder ziehen Sie es hier hin</span>
+                                </label>
+                                <div id="news-image-preview" class="image-preview"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Event Tab -->
+                    <div id="event-tab" class="tab-content">
+                        <div class="form-group">
+                            <label for="event-post-title">Event Titel</label>
+                            <input type="text" id="event-post-title" placeholder="Name des Events" required>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="event-post-author">Organisator</label>
+                                <input type="text" id="event-post-author" placeholder="Ihr Name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="event-post-location">Ort</label>
+                                <input type="text" id="event-post-location" placeholder="Event-Ort" required>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="event-post-date">Datum</label>
+                                <input type="date" id="event-post-date" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="event-post-time">Uhrzeit</label>
+                                <input type="time" id="event-post-time" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="event-post-description">Event Beschreibung</label>
+                            <textarea id="event-post-description" placeholder="Beschreiben Sie das Event..." rows="8" required></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="event-post-image">Event Bild</label>
+                            <div class="image-upload">
+                                <input type="file" id="event-post-image" accept="image/*">
+                                <label for="event-post-image" class="upload-label">
+                                    <span class="upload-icon">🖼️</span>
+                                    <span>Klicken Sie hier um ein Bild hochzuladen oder ziehen Sie es hier hin</span>
+                                </label>
+                                <div id="event-image-preview" class="image-preview"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" id="modal-cancel" class="btn-cancel">Abbrechen</button>
+                        <button type="submit" class="btn-submit">Beitrag veröffentlichen</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- News Section -->
+    <section class="news-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Aktuelle News aus den Abteilungen</h2>
+                <a href="#" class="view-all">Alle anzeigen →</a>
+            </div>
+            <div class="news-grid">
+                <div class="news-card">
+                    <div class="news-image">🔧</div>
+                    <div class="news-content">
+                        <span class="news-category">Technik</span>
+                        <h3>Erfolgreicher Test im Technischen Erprobungszentrum</h3>
+                        <p>Das TEZ hat die neuen Prototypen für die Maritime-Serie erfolgreich unter Extrembedingungen getestet.</p>
+                        <div class="news-footer">
+                            <div class="news-author">
+                                <div class="author-avatar">OW</div>
+                                <div class="author-info">
+                                    <div class="author-name">Olav Weidemann</div>
+                                    <div class="news-date">Vor 2 Stunden</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="news-card">
+                    <div class="news-image">📊</div>
+                    <div class="news-content">
+                        <span class="news-category">Sales</span>
+                        <h3>Großauftrag aus dem Industry-Bereich</h3>
+                        <p>Neue Partnerschaft mit führendem Automobilhersteller für maßgeschneiderte Kompressor-Lösungen.</p>
+                        <div class="news-footer">
+                            <div class="news-author">
+                                <div class="author-avatar">RD</div>
+                                <div class="author-info">
+                                    <div class="author-name">Ralf Deichelmann</div>
+                                    <div class="news-date">Gestern</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="news-card">
+                    <div class="news-image">⚙️</div>
+                    <div class="news-content">
+                        <span class="news-category">Produktion</span>
+                        <h3>Optimierung der Montage-Prozesse</h3>
+                        <p>Neue Workflows in der Montage-Abteilung steigern Effizienz um 15% und verbessern Qualitätskontrolle.</p>
+                        <div class="news-footer">
+                            <div class="news-author">
+                                <div class="author-avatar">AM</div>
+                                <div class="author-info">
+                                    <div class="author-name">Andreas Meixner</div>
+                                    <div class="news-date">Vor 3 Tagen</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="news-card">
+                    <div class="news-image">🎓</div>
+                    <div class="news-content">
+                        <span class="news-category">Academy</span>
+                        <h3>Neue Schulungstermine verfügbar</h3>
+                        <p>Die BAUER Academy bietet ab nächstem Monat erweiterte Trainings für Servicetechniker an.</p>
+                        <div class="news-footer">
+                            <div class="news-author">
+                                <div class="author-avatar">VF</div>
+                                <div class="author-info">
+                                    <div class="author-name">Vitali Franz</div>
+                                    <div class="news-date">Vor 5 Tagen</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="news-card">
+                    <div class="news-image">🛡️</div>
+                    <div class="news-content">
+                        <span class="news-category">Sicherheit</span>
+                        <h3>Arbeitssicherheits-Audit erfolgreich abgeschlossen</h3>
+                        <p>Alle Produktionsbereiche erfüllen die höchsten Sicherheitsstandards. Gratulation an alle Beteiligten!</p>
+                        <div class="news-footer">
+                            <div class="news-author">
+                                <div class="author-avatar">SB</div>
+                                <div class="author-info">
+                                    <div class="author-name">Sicherheitsbeauftragter</div>
+                                    <div class="news-date">Vor 1 Woche</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="news-card">
+                    <div class="news-image">🌍</div>
+                    <div class="news-content">
+                        <span class="news-category">Marketing</span>
+                        <h3>BAUER auf internationaler Fachmesse</h3>
+                        <p>Erfolgreiche Präsentation unserer Innovationen auf der Compressor Tech Expo in Dubai.</p>
+                        <div class="news-footer">
+                            <div class="news-author">
+                                <div class="author-avatar">RD</div>
+                                <div class="author-info">
+                                    <div class="author-name">Ralf Deichelmann</div>
+                                    <div class="news-date">Vor 1 Woche</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Links -->
+    <section class="quick-links">
+        <div class="container">
+            <h3>Service & Hilfe</h3>
+            <div class="links-grid">
+                <a href="#" class="link-item">
+                    <div class="link-icon">💬</div>
+                    <h4>Help Desk</h4>
+                    <p>IT-Support von Nuri Al</p>
+                </a>
+                <a href="#" class="link-item">
+                    <div class="link-icon">📚</div>
+                    <h4>Dokumenten-Archiv</h4>
+                    <p>Technische Handbücher & Nachweise</p>
+                </a>
+                <a href="#" class="link-item">
+                    <div class="link-icon">🎓</div>
+                    <h4>BAUER Academy</h4>
+                    <p>Schulungen & Weiterbildung</p>
+                </a>
+                <a href="#" class="link-item">
+                    <div class="link-icon">⚖️</div>
+                    <h4>Recht & Compliance</h4>
+                    <p>Dokumente von Andreas Huber</p>
+                </a>
+                <a href="#" class="link-item">
+                    <div class="link-icon">👥</div>
+                    <h4>HR Portal</h4>
+                    <p>Urlaub, Gehalt, Personalthemen</p>
+                </a>
+                <a href="#" class="link-item">
+                    <div class="link-icon">🔍</div>
+                    <h4>News-Archiv</h4>
+                    <p>Alle Meldungen durchsuchen</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Departments Section -->
+    <section class="departments">
+        <div class="container">
+            <div class="section-header">
+                <h2>Unsere Abteilungen</h2>
+            </div>
+            <div class="dept-grid">
+                <div class="dept-card">
+                    <div class="dept-header">
+                        <div class="dept-icon">🏢</div>
+                        <h3>Geschäftsführung</h3>
+                    </div>
+                    <p>Strategische Führung und Unternehmensausrichtung für nachhaltige Entwicklung.</p>
+                    <div class="dept-contact">
+                        <div class="contact-item">📧 geschaeftsfuehrung@bauer-kompressoren.de</div>
+                        <div class="contact-item">📞 +49 (0) 9181 / 30 97-0</div>
+                    </div>
+                </div>
+
+                <div class="dept-card">
+                    <div class="dept-header">
+                        <div class="dept-icon">🔬</div>
+                        <h3>Zentrale Entwicklung</h3>
+                    </div>
+                    <p>Innovation und technologische Weiterentwicklung unserer Produktpalette.</p>
+                    <div class="dept-contact">
+                        <div class="contact-item">👤 Leitung: Entwicklungsteam</div>
+                        <div class="contact-item">📧 entwicklung@bauer-kompressoren.de</div>
+                    </div>
+                </div>
+
+                <div class="dept-card">
+                    <div class="dept-header">
+                        <div class="dept-icon">✅</div>
+                        <h3>Qualitätsmanagement</h3>
+                    </div>
+                    <p>Sicherstellung höchster Qualitätsstandards in allen Prozessen.</p>
+                    <div class="dept-contact">
+                        <div class="contact-item">📧 qualitaet@bauer-kompressoren.de</div>
+                    </div>
+                </div>
+
+                <div class="dept-card">
+                    <div class="dept-header">
+                        <div class="dept-icon">📊</div>
+                        <h3>Sales Competence Center</h3>
+                    </div>
+                    <p>Vertrieb für Sports & Safety, Industry und Maritime Segmente.</p>
+                    <div class="dept-contact">
+                        <div class="contact-item">👤 Marketing: Ralf Deichelmann</div>
+                        <div class="contact-item">📧 sales@bauer-kompressoren.de</div>
+                    </div>
+                </div>
+
+                <div class="dept-card">
+                    <div class="dept-header">
+                        <div class="dept-icon">⚙️</div>
+                        <h3>Operations & Produktion</h3>
+                    </div>
+                    <p>Effiziente Fertigung und Montage unserer Kompressor-Systeme.</p>
+                    <div class="dept-contact">
+                        <div class="contact-item">👤 Montagen: Andreas Meixner</div>
+                        <div class="contact-item">📧 produktion@bauer-kompressoren.de</div>
+                    </div>
+                </div>
+
+                <div class="dept-card">
+                    <div class="dept-header">
+                        <div class="dept-icon">🚚</div>
+                        <h3>Service & Logistik</h3>
+                    </div>
+                    <p>Kundenservice, Wartung und weltweite Ersatzteilversorgung.</p>
+                    <div class="dept-contact">
+                        <div class="contact-item">📧 service@bauer-kompressoren.de</div>
+                    </div>
+                </div>
+
+                <div class="dept-card">
+                    <div class="dept-header">
+                        <div class="dept-icon">👥</div>
+                        <h3>Human Resources</h3>
+                    </div>
+                    <p>Personalmanagement, Recruiting und Mitarbeiterentwicklung.</p>
+                    <div class="dept-contact">
+                        <div class="contact-item">👤 Volker Sandfuchs</div>
+                        <div class="contact-item">📧 hr@bauer-kompressoren.de</div>
+                    </div>
+                </div>
+
+                <div class="dept-card">
+                    <div class="dept-header">
+                        <div class="dept-icon">🔧</div>
+                        <h3>Projektmanagement</h3>
+                    </div>
+                    <p>Koordination und Steuerung unternehmensweiter Projekte.</p>
+                    <div class="dept-contact">
+                        <div class="contact-item">👤 Olav Weidemann</div>
+                        <div class="contact-item">📧 projekte@bauer-kompressoren.de</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>BAUER KOMPRESSOREN</h4>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">
+                        Weltweit führender Hersteller von Hochdruck-Kompressoren und Füllsystemen.
+                    </p>
+                </div>
+                <div class="footer-section">
+                    <h4>Schnellzugriff</h4>
+                    <ul>
+                        <li><a href="#">Organigramm</a></li>
+                        <li><a href="#">Telefonverzeichnis</a></li>
+                        <li><a href="#">Standorte</a></li>
+                        <li><a href="#">Formulare</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Ressourcen</h4>
+                    <ul>
+                        <li><a href="#">Technisches Archiv</a></li>
+                        <li><a href="#">Betriebsvereinbarungen</a></li>
+                        <li><a href="#">IT-Richtlinien</a></li>
+                        <li><a href="#">Brandschutz</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">IT Help Desk</a></li>
+                        <li><a href="#">HR Service</a></li>
+                        <li><a href="#">Facility Management</a></li>
+                        <li><a href="#">Datenschutz</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 BAUER KOMPRESSOREN GmbH. Alle Rechte vorbehalten. | Quality. Our DNA.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Modal and Form Management
+        const modal = document.getElementById('post-modal');
+        const openBtn = document.getElementById('open-post-modal');
+        const closeBtn = document.querySelector('.modal-close');
+        const cancelBtn = document.getElementById('modal-cancel');
+        const form = document.getElementById('blog-post-form');
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        let currentTab = 'news-tab';
+        let uploadedImages = {};
+
+        // Open Modal
+        openBtn.addEventListener('click', () => {
+            modal.classList.add('show');
+            document.body.style.overflow = 'hidden';
+        });
+
+        // Close Modal
+        function closeModal() {
+            modal.classList.remove('show');
+            document.body.style.overflow = 'auto';
+            form.reset();
+            uploadedImages = {};
+            document.getElementById('news-image-preview').innerHTML = '';
+            document.getElementById('event-image-preview').innerHTML = '';
+        }
+
+        closeBtn.addEventListener('click', closeModal);
+        cancelBtn.addEventListener('click', closeModal);
+
+        // Close modal when clicking outside
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+
+        // Tab Switching
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove active class from all buttons and contents
+                tabBtns.forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(tc => tc.classList.remove('active'));
+
+                // Add active class to clicked button and corresponding content
+                btn.classList.add('active');
+                currentTab = btn.dataset.tab;
+                document.getElementById(currentTab).classList.add('active');
+            });
+        });
+
+        // Image Upload Handling
+        const imageInputs = document.querySelectorAll('input[type="file"]');
+        imageInputs.forEach(input => {
+            const previewContainer = input.parentElement.querySelector('.image-preview');
+            
+            input.addEventListener('change', (e) => {
+                handleImageUpload(e, previewContainer);
+            });
+
+            // Drag and drop
+            input.parentElement.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                input.parentElement.style.borderColor = 'var(--accent)';
+                input.parentElement.style.background = 'rgba(0, 102, 204, 0.05)';
+            });
+
+            input.parentElement.addEventListener('dragleave', () => {
+                input.parentElement.style.borderColor = 'var(--border)';
+                input.parentElement.style.background = 'transparent';
+            });
+
+            input.parentElement.addEventListener('drop', (e) => {
+                e.preventDefault();
+                input.parentElement.style.borderColor = 'var(--border)';
+                input.parentElement.style.background = 'transparent';
+                input.files = e.dataTransfer.files;
+                handleImageUpload({ target: input }, previewContainer);
+            });
+        });
+
+        function handleImageUpload(e, previewContainer) {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = (event) => {
+                const imageId = 'img-' + Date.now();
+                uploadedImages[imageId] = event.target.result;
+
+                const previewItem = document.createElement('div');
+                previewItem.className = 'preview-item';
+                previewItem.innerHTML = `
+                    <img src="${event.target.result}" alt="Preview">
+                    <button type="button" class="preview-remove" data-image-id="${imageId}">×</button>
+                `;
+
+                previewContainer.appendChild(previewItem);
+
+                previewItem.querySelector('.preview-remove').addEventListener('click', (e) => {
+                    e.preventDefault();
+                    delete uploadedImages[imageId];
+                    previewItem.remove();
+                });
+            };
+            reader.readAsDataURL(file);
+        }
+
+        // Form Submit
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            let postData = {};
+            
+            if (currentTab === 'news-tab') {
+                postData = {
+                    type: 'news',
+                    title: document.getElementById('news-post-title').value,
+                    author: document.getElementById('news-post-author').value,
+                    category: document.getElementById('news-post-category').value,
+                    content: document.getElementById('news-post-text').value,
+                    images: Object.values(uploadedImages),
+                    emoji: getCategoryEmoji(document.getElementById('news-post-category').value)
+                };
+            } else {
+                postData = {
+                    type: 'event',
+                    title: document.getElementById('event-post-title').value,
+                    author: document.getElementById('event-post-author').value,
+                    location: document.getElementById('event-post-location').value,
+                    date: document.getElementById('event-post-date').value,
+                    time: document.getElementById('event-post-time').value,
+                    content: document.getElementById('event-post-description').value,
+                    images: Object.values(uploadedImages),
+                    emoji: '📅'
+                };
+            }
+
+            createPostCard(postData);
+            closeModal();
+            showSuccessMessage(postData.type === 'news' ? 'News' : 'Event');
+        });
+
+        function getCategoryEmoji(category) {
+            const emojiMap = {
+                'Technik': '🔧',
+                'Sales': '📊',
+                'Produktion': '⚙️',
+                'Academy': '🎓',
+                'Sicherheit': '🛡️',
+                'Marketing': '🌍',
+                'HR': '👥'
+            };
+            return emojiMap[category] || '📰';
+        }
+
+        function createPostCard(data) {
+            const newsGrid = document.querySelector('.news-grid');
+            const newsCard = document.createElement('div');
+            newsCard.className = 'news-card';
+            newsCard.style.animation = 'fadeIn 0.6s ease-out';
+
+            let cardHTML = `
+                <div class="news-image">${data.emoji}</div>
+                <div class="news-content">
+            `;
+
+            if (data.type === 'news') {
+                cardHTML += `
+                    <span class="news-category">${data.category}</span>
+                    <h3>${data.title}</h3>
+                    <p>${data.content}</p>
+                `;
+            } else {
+                const dateObj = new Date(data.date);
+                const formattedDate = dateObj.toLocaleDateString('de-DE', { 
+                    year: 'numeric', 
+                    month: 'long', 
+                    day: 'numeric' 
+                });
+                cardHTML += `
+                    <span class="news-category">EVENT</span>
+                    <h3>${data.title}</h3>
+                    <p><strong>📍 ${data.location}</strong></p>
+                    <p><strong>🕐 ${formattedDate} um ${data.time}</strong></p>
+                    <p>${data.content}</p>
+                `;
+            }
+
+            if (data.images.length > 0) {
+                cardHTML += `
+                    <div class="post-images">
+                        ${data.images.map(img => `<img src="${img}" alt="Post Image" style="width: 100%; margin-top: 1rem; border-radius: 8px;">`).join('')}
+                    </div>
+                `;
+            }
+
+            cardHTML += `
+                    <div class="news-footer">
+                        <div class="news-author">
+                            <div class="author-avatar">${data.author.substring(0, 2).toUpperCase()}</div>
+                            <div class="author-info">
+                                <div class="author-name">${data.author}</div>
+                                <div class="news-date">gerade eben</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            newsCard.innerHTML = cardHTML;
+            newsGrid.insertBefore(newsCard, newsGrid.firstChild);
+
+            // Add click event
+            newsCard.addEventListener('click', function() {
+                const category = this.querySelector('.news-category').textContent;
+                const title = this.querySelector('h3').textContent;
+                console.log(`Öffne: ${category} - ${title}`);
+            });
+
+            // Scroll to news section
+            document.querySelector('.news-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        function showSuccessMessage(type) {
+            const successMsg = document.createElement('div');
+            successMsg.textContent = `✓ ${type} erfolgreich veröffentlicht!`;
+            successMsg.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: #06D6A0;
+                color: white;
+                padding: 1rem 1.5rem;
+                border-radius: 8px;
+                font-weight: 600;
+                box-shadow: 0 10px 30px rgba(6, 214, 160, 0.3);
+                z-index: 2001;
+                animation: slideIn 0.4s ease-out;
+            `;
+            document.body.appendChild(successMsg);
+
+            setTimeout(() => {
+                successMsg.style.animation = 'slideOut 0.4s ease-out';
+                setTimeout(() => successMsg.remove(), 400);
+            }, 3000);
+        }
+
+        // Add animations
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideIn {
+                from {
+                    transform: translateX(400px);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+            }
+            @keyframes slideOut {
+                to {
+                    transform: translateX(400px);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add hover animation to cards
+        const cards = document.querySelectorAll('.news-card, .dept-card, .hero-card, .link-item');
+        cards.forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transition = 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+            });
+        });
+
+        // Dynamic time display
+        function updateTime() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' });
+            const dateString = now.toLocaleDateString('de-DE', { 
+                weekday: 'long', 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            });
+        }
+        updateTime();
+        setInterval(updateTime, 60000);
+
+        // Parallax effect for hero section
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero');
+            if (hero) {
+                hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+                hero.style.opacity = 1 - (scrolled / 800);
+            }
+        });
+
+        // Add click events to news cards
+        document.querySelectorAll('.news-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const category = this.querySelector('.news-category').textContent;
+                const title = this.querySelector('h3').textContent;
+                console.log(`Öffne News: ${category} - ${title}`);
+            });
+        });
+    </script>
+</body>
+</html>

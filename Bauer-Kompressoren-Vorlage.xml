@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<pnp:Provisioning xmlns:pnp="http://schemas.dev.office.com/PnP/provisioning/202108" 
+                   xmlns:pnpcore="http://schemas.dev.office.com/PnP/provisioning/202401"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://schemas.dev.office.com/PnP/provisioning/202108 http://schemas.dev.office.com/PnP/provisioning/202108/ProvisioningSchema.xsd">
+  <pnp:Preferences Generator="Bauer Kompressoren Intranet Template" />
+  
+  <pnp:Templates ID="BAUER-KOMPRESSOREN-INTRANET">
+    <pnp:ProvisioningTemplate ID="BAUER-KOMPRESSOREN-INTRANET-TEMPLATE" Version="1.0" 
+                             DisplayName="BAUER KOMPRESSOREN - Intranet" 
+                             Description="Unternehmens-Intranet Vorlage für BAUER KOMPRESSOREN mit News, Events und Abteilungsmanagement">
+      
+      <!-- Lists for News and Events -->
+      <pnp:Lists>
+        <!-- News List -->
+        <pnp:ListInstance Title="News" Description="Aktuelle Neuigkeiten aus den Abteilungen" Url="Lists/News" TemplateType="GenericList" EnableVersioning="true" EnableMinorVersions="false" DraftVersionVisibility="0">
+          <pnp:Fields>
+            <pnp:Field ID="1d22ea11-816b-41a5-9c88-f4abf4999dc3" Type="Text" Name="NewsTitle" DisplayName="Titel" Required="true" CanToggleHidden="false" />
+            <pnp:Field ID="2d22ea11-816b-41a5-9c88-f4abf4999dc4" Type="Note" Name="NewsContent" DisplayName="Inhalt" Required="true" />
+            <pnp:Field ID="3d22ea11-816b-41a5-9c88-f4abf4999dc5" Type="Choice" Name="NewsCategory" DisplayName="Kategorie" Required="true">
+              <CHOICE>Technik</CHOICE>
+              <CHOICE>Sales</CHOICE>
+              <CHOICE>Produktion</CHOICE>
+              <CHOICE>IT</CHOICE>
+              <CHOICE>Marketing</CHOICE>
+              <CHOICE>HR</CHOICE>
+              <CHOICE>Finanzen</CHOICE>
+            </pnp:Field>
+            <pnp:Field ID="4d22ea11-816b-41a5-9c88-f4abf4999dc6" Type="User" Name="NewsAuthor" DisplayName="Autor" UserSelectionMode="PeopleOnly" Required="true" />
+            <pnp:Field ID="5d22ea11-816b-41a5-9c88-f4abf4999dc7" Type="Attachments" Name="Attachments" DisplayName="Anhänge" />
+          </pnp:Fields>
+          <pnp:Views>
+            <pnp:View Name="All Items" DefaultView="true" MobileView="true" MobileDefaultView="true" Paged="true" PageSize="30" Query="&lt;OrderBy&gt;&lt;FieldRef Name='Created' Ascending='False'/&gt;&lt;/OrderBy&gt;">
+              <pnp:ViewFields>
+                <pnp:ViewField Name="NewsTitle" />
+                <pnp:ViewField Name="NewsCategory" />
+                <pnp:ViewField Name="NewsAuthor" />
+                <pnp:ViewField Name="Created" />
+              </pnp:ViewFields>
+            </pnp:View>
+          </pnp:Views>
+        </pnp:ListInstance>
+
+        <!-- Events List -->
+        <pnp:ListInstance Title="Events" Description="Unternehmens-Events und Veranstaltungen" Url="Lists/Events" TemplateType="GenericList" EnableVersioning="true" EnableMinorVersions="false" DraftVersionVisibility="0">
+          <pnp:Fields>
+            <pnp:Field ID="1e22ea11-816b-41a5-9c88-f4abf4999dd3" Type="Text" Name="EventTitle" DisplayName="Event-Titel" Required="true" CanToggleHidden="false" />
+            <pnp:Field ID="2e22ea11-816b-41a5-9c88-f4abf4999dd4" Type="Text" Name="EventLocation" DisplayName="Ort" Required="true" />
+            <pnp:Field ID="3e22ea11-816b-41a5-9c88-f4abf4999dd5" Type="DateTime" Name="EventDate" DisplayName="Datum" Required="true" Format="DateOnly" />
+            <pnp:Field ID="4e22ea11-816b-41a5-9c88-f4abf4999dd6" Type="Text" Name="EventTime" DisplayName="Uhrzeit" Required="true" />
+            <pnp:Field ID="5e22ea11-816b-41a5-9c88-f4abf4999dd7" Type="Note" Name="EventDescription" DisplayName="Beschreibung" Required="true" />
+            <pnp:Field ID="6e22ea11-816b-41a5-9c88-f4abf4999dd8" Type="User" Name="EventOrganizer" DisplayName="Organisator" UserSelectionMode="PeopleOnly" Required="true" />
+            <pnp:Field ID="7e22ea11-816b-41a5-9c88-f4abf4999dd9" Type="Attachments" Name="Attachments" DisplayName="Anhänge" />
+          </pnp:Fields>
+          <pnp:Views>
+            <pnp:View Name="All Items" DefaultView="true" MobileView="true" MobileDefaultView="true" Paged="true" PageSize="30" Query="&lt;OrderBy&gt;&lt;FieldRef Name='EventDate' Ascending='False'/&gt;&lt;/OrderBy&gt;">
+              <pnp:ViewFields>
+                <pnp:ViewField Name="EventTitle" />
+                <pnp:ViewField Name="EventDate" />
+                <pnp:ViewField Name="EventLocation" />
+                <pnp:ViewField Name="EventOrganizer" />
+              </pnp:ViewFields>
+            </pnp:View>
+          </pnp:Views>
+        </pnp:ListInstance>
+
+        <!-- Departments List -->
+        <pnp:ListInstance Title="Abteilungen" Description="Unternehmens-Abteilungen und Kontaktinformationen" Url="Lists/Abteilungen" TemplateType="GenericList" EnableVersioning="true" EnableMinorVersions="false" DraftVersionVisibility="0">
+          <pnp:Fields>
+            <pnp:Field ID="1f22ea11-816b-41a5-9c88-f4abf4999de3" Type="Text" Name="DeptName" DisplayName="Abteilungsname" Required="true" CanToggleHidden="false" />
+            <pnp:Field ID="2f22ea11-816b-41a5-9c88-f4abf4999de4" Type="Note" Name="DeptDescription" DisplayName="Beschreibung" Required="true" />
+            <pnp:Field ID="3f22ea11-816b-41a5-9c88-f4abf4999de5" Type="Text" Name="DeptLeader" DisplayName="Abteilungsleiter" />
+            <pnp:Field ID="4f22ea11-816b-41a5-9c88-f4abf4999de6" Type="Text" Name="DeptEmail" DisplayName="E-Mail" />
+            <pnp:Field ID="5f22ea11-816b-41a5-9c88-f4abf4999de7" Type="Text" Name="DeptPhone" DisplayName="Telefon" />
+          </pnp:Fields>
+          <pnp:Views>
+            <pnp:View Name="All Items" DefaultView="true" MobileView="true" MobileDefaultView="true" Paged="true" PageSize="30">
+              <pnp:ViewFields>
+                <pnp:ViewField Name="DeptName" />
+                <pnp:ViewField Name="DeptLeader" />
+                <pnp:ViewField Name="DeptEmail" />
+                <pnp:ViewField Name="DeptPhone" />
+              </pnp:ViewFields>
+            </pnp:View>
+          </pnp:Views>
+        </pnp:ListInstance>
+      </pnp:Lists>
+
+      <!-- Custom CSS for modern design -->
+      <pnp:Files>
+        <pnp:File Src="Bauer-Kompressoren-Styles.css" Folder="SiteAssets" Overwrite="true" />
+      </pnp:Files>
+
+      <!-- Web Parts for Homepage -->
+      <pnp:ClientSidePages>
+        <pnp:ClientSidePage PageName="Startseite.aspx" LayoutType="Home" Publish="true" PromoteAsTemplate="false" Title="BAUER KOMPRESSOREN - Intranet Startseite">
+          <pnp:Sections>
+            <!-- Header Section -->
+            <pnp:Section Order="1" Type="OneColumn" Background="5" Emphasis="Light">
+              <pnp:Controls>
+                <pnp:Control Tab="Home" Order="1" ControlId="11111111-1111-1111-1111-111111111111" ControlType="Custom" JsonControlData="{&quot;webPartData&quot;:{&quot;title&quot;:&quot;BAUER KOMPRESSOREN Intranet&quot;,&quot;description&quot;:&quot;Herzlich Willkommen&quot;},&quot;position&quot;:{&quot;zoneIndex&quot;:0,&quot;sectionIndex&quot;:1,&quot;sectionFactor&quot;:12,&quot;layoutIndex&quot;:1}}" />
+              </pnp:Controls>
+            </pnp:Section>
+
+            <!-- News Section -->
+            <pnp:Section Order="2" Type="OneColumn" Background="0">
+              <pnp:Controls>
+                <pnp:Control Tab="Home" Order="1" ControlId="22222222-2222-2222-2222-222222222222" ControlType="List" DataSourceUrl="Lists/News" Title="Aktuelle News" MultiSelect="false" ItemLimit="6" ViewId="All Items" />
+              </pnp:Controls>
+            </pnp:Section>
+
+            <!-- Events Section -->
+            <pnp:Section Order="3" Type="OneColumn" Background="0">
+              <pnp:Controls>
+                <pnp:Control Tab="Home" Order="1" ControlId="33333333-3333-3333-3333-333333333333" ControlType="List" DataSourceUrl="Lists/Events" Title="Kommende Events" MultiSelect="false" ItemLimit="6" ViewId="All Items" />
+              </pnp:Controls>
+            </pnp:Section>
+
+            <!-- Departments Section -->
+            <pnp:Section Order="4" Type="OneColumn" Background="0">
+              <pnp:Controls>
+                <pnp:Control Tab="Home" Order="1" ControlId="44444444-4444-4444-4444-444444444444" ControlType="List" DataSourceUrl="Lists/Abteilungen" Title="Unsere Abteilungen" MultiSelect="false" ItemLimit="8" ViewId="All Items" />
+              </pnp:Controls>
+            </pnp:Section>
+          </pnp:Sections>
+        </pnp:ClientSidePage>
+
+        <!-- News Management Page -->
+        <pnp:ClientSidePage PageName="News-Verwaltung.aspx" LayoutType="Article" Publish="true" PromoteAsTemplate="false" Title="News und Events Verwaltung">
+          <pnp:Sections>
+            <pnp:Section Order="1" Type="OneColumn" Background="0">
+              <pnp:Controls>
+                <pnp:Control Tab="Home" Order="1" ControlId="55555555-5555-5555-5555-555555555555" ControlType="List" DataSourceUrl="Lists/News" Title="News-Verwaltung" MultiSelect="false" ItemLimit="50" ViewId="All Items" />
+              </pnp:Controls>
+            </pnp:Section>
+          </pnp:Sections>
+        </pnp:ClientSidePage>
+
+        <!-- Events Management Page -->
+        <pnp:ClientSidePage PageName="Events-Verwaltung.aspx" LayoutType="Article" Publish="true" PromoteAsTemplate="false" Title="Events Verwaltung">
+          <pnp:Sections>
+            <pnp:Section Order="1" Type="OneColumn" Background="0">
+              <pnp:Controls>
+                <pnp:Control Tab="Home" Order="1" ControlId="66666666-6666-6666-6666-666666666666" ControlType="List" DataSourceUrl="Lists/Events" Title="Events-Verwaltung" MultiSelect="false" ItemLimit="50" ViewId="All Items" />
+              </pnp:Controls>
+            </pnp:Section>
+          </pnp:Sections>
+        </pnp:ClientSidePage>
+      </pnp:ClientSidePages>
+
+      <!-- Navigation -->
+      <pnp:Navigation>
+        <pnp:GlobalNavigation>
+          <pnp:StructuralNavigation>
+            <pnp:NavigationNode Title="Startseite" Url="Startseite.aspx" />
+            <pnp:NavigationNode Title="News &amp; Events" Url="#" IsExternal="false">
+              <pnp:NavigationNode Title="Aktuelle News" Url="News-Verwaltung.aspx" />
+              <pnp:NavigationNode Title="Events" Url="Events-Verwaltung.aspx" />
+            </pnp:NavigationNode>
+            <pnp:NavigationNode Title="Zentrale" Url="#zentrale" />
+            <pnp:NavigationNode Title="Technik" Url="#technik" />
+            <pnp:NavigationNode Title="Sales" Url="#sales" />
+            <pnp:NavigationNode Title="Produktion" Url="#produktion" />
+            <pnp:NavigationNode Title="Academy" Url="#academy" />
+            <pnp:NavigationNode Title="Abteilungen" Url="Lists/Abteilungen" />
+            <pnp:NavigationNode Title="Service &amp; Hilfe" Url="Service-Links.aspx" />
+          </pnp:StructuralNavigation>
+        </pnp:GlobalNavigation>
+      </pnp:Navigation>
+
+      <!-- Quick Links List -->
+      <pnp:ListInstance Title="Service Links" Description="Wichtige Service- und Hilfefunktionen" Url="Lists/ServiceLinks" TemplateType="GenericList" EnableVersioning="true">
+        <pnp:Fields>
+          <pnp:Field ID="1g22ea11-816b-41a5-9c88-f4abf4999de3" Type="Text" Name="LinkTitle" DisplayName="Titel" Required="true" CanToggleHidden="false" />
+          <pnp:Field ID="2g22ea11-816b-41a5-9c88-f4abf4999de4" Type="Note" Name="LinkDescription" DisplayName="Beschreibung" Required="true" />
+          <pnp:Field ID="3g22ea11-816b-41a5-9c88-f4abf4999de5" Type="URL" Name="LinkURL" DisplayName="Link" Required="true" />
+          <pnp:Field ID="4g22ea11-816b-41a5-9c88-f4abf4999de6" Type="Text" Name="LinkIcon" DisplayName="Icon" />
+        </pnp:Fields>
+        <pnp:DataRows>
+          <pnp:DataRow>
+            <pnp:Field Name="LinkTitle">Help Desk</pnp:Field>
+            <pnp:Field Name="LinkDescription">IT-Support von Nuri Al</pnp:Field>
+            <pnp:Field Name="LinkURL">https://bauer-kompressoren.sharepoint.com/sites/support</pnp:Field>
+            <pnp:Field Name="LinkIcon">💬</pnp:Field>
+          </pnp:DataRow>
+          <pnp:DataRow>
+            <pnp:Field Name="LinkTitle">Dokumenten-Archiv</pnp:Field>
+            <pnp:Field Name="LinkDescription">Technische Handbücher &amp; Nachweise</pnp:Field>
+            <pnp:Field Name="LinkURL">https://bauer-kompressoren.sharepoint.com/sites/docs</pnp:Field>
+            <pnp:Field Name="LinkIcon">📚</pnp:Field>
+          </pnp:DataRow>
+          <pnp:DataRow>
+            <pnp:Field Name="LinkTitle">BAUER Academy</pnp:Field>
+            <pnp:Field Name="LinkDescription">Schulungen &amp; Weiterbildung</pnp:Field>
+            <pnp:Field Name="LinkURL">https://bauer-kompressoren.sharepoint.com/sites/academy</pnp:Field>
+            <pnp:Field Name="LinkIcon">🎓</pnp:Field>
+          </pnp:DataRow>
+          <pnp:DataRow>
+            <pnp:Field Name="LinkTitle">Recht &amp; Compliance</pnp:Field>
+            <pnp:Field Name="LinkDescription">Dokumente von Andreas Huber</pnp:Field>
+            <pnp:Field Name="LinkURL">https://bauer-kompressoren.sharepoint.com/sites/compliance</pnp:Field>
+            <pnp:Field Name="LinkIcon">⚖️</pnp:Field>
+          </pnp:DataRow>
+          <pnp:DataRow>
+            <pnp:Field Name="LinkTitle">HR Portal</pnp:Field>
+            <pnp:Field Name="LinkDescription">Urlaub, Gehalt, Personalthemen</pnp:Field>
+            <pnp:Field Name="LinkURL">https://bauer-kompressoren.sharepoint.com/sites/hr</pnp:Field>
+            <pnp:Field Name="LinkIcon">👥</pnp:Field>
+          </pnp:DataRow>
+          <pnp:DataRow>
+            <pnp:Field Name="LinkTitle">News-Archiv</pnp:Field>
+            <pnp:Field Name="LinkDescription">Alle Meldungen durchsuchen</pnp:Field>
+            <pnp:Field Name="LinkURL">News-Verwaltung.aspx</pnp:Field>
+            <pnp:Field Name="LinkIcon">🔍</pnp:Field>
+          </pnp:DataRow>
+        </pnp:DataRows>
+      </pnp:ListInstance>
+
+      <!-- Web Settings and Properties -->
+      <pnp:PropertyBagEntries>
+        <pnp:PropertyBagEntry Key="CompanyName" Value="BAUER KOMPRESSOREN GmbH" />
+        <pnp:PropertyBagEntry Key="CompanyTagline" Value="Quality. Our DNA." />
+        <pnp:PropertyBagEntry Key="ThemeColor" Value="#1E5BA8" />
+        <pnp:PropertyBagEntry Key="AccentColor" Value="#0066CC" />
+      </pnp:PropertyBagEntries>
+
+    </pnp:ProvisioningTemplate>
+  </pnp:Templates>
+</pnp:Provisioning>
